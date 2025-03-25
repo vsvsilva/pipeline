@@ -7,6 +7,7 @@ API_KEY = os.getenv("CURRENCY_API_KEY")
 print('API_KEY: ', API_KEY)
 ENDPOINT = f'https://api.currencyfreaks.com/v2.0/rates/latest?apikey={API_KEY}'
 
+
 def get_currency(from_currency):
     response = requests.get(ENDPOINT, timeout=10)
     data = response.json()
