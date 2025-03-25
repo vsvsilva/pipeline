@@ -20,9 +20,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Tests
-        run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)
-          pytest tests/
+        run: pytest tests/
 
       - name: Build Application
         run: python setup.py sdist bdist_wheel
