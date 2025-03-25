@@ -26,3 +26,23 @@ jobs:
 
       - name: Build Application
         run: python setup.py sdist bdist_wheel
+      
+      - name: Save Logs
+        run: |
+          mkdir -p logs
+          echo "Saving logs..." > logs/build.log
+          dmesg >> logs/build.log
+          echo "Tests and build logs saved." >> logs/build.log
+
+      - name: Send email by build completion
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          subject: Build completed
+          body: The build has been completed successfully
+          to: ${{ secrets.EMAIL_USERNAME }}
+          from: ${{ secrets.EMAIL_USERNAME }}
+          attachments: dist/*,logs/build.log
