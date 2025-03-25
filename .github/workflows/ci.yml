@@ -25,16 +25,11 @@ jobs:
           pytest tests/
 
       - name: Build Application
-        run: python setup.py sdist bdist_wheel
-      
-      - name: Save Logs
         run: |
           mkdir -p logs
-          echo "Saving logs..." > logs/build.log
-          echo "Build and test logs placeholder." >> logs/build.log
-          echo "Tests and build logs saved." >> logs/build.log
+          python setup.py sdist bdist_wheel > logs/build.log 2>&1
 
-      - name: Send email by build completion
+      - name: Send logs to email by build completion
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
