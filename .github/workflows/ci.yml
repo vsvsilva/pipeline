@@ -29,9 +29,9 @@ jobs:
       
       - name: Save Logs
         run: |
-          sudo mkdir -p logs
+          mkdir -p logs
           echo "Saving logs..." > logs/build.log
-          dmesg >> logs/build.log
+          echo "Build and test logs placeholder." >> logs/build.log
           echo "Tests and build logs saved." >> logs/build.log
 
       - name: Send email by build completion
