@@ -10,7 +10,10 @@ ENDPOINT = f'https://api.currencyfreaks.com/v2.0/rates/latest?apikey={API_KEY}'
 def get_currency(from_currency):
     response = requests.get(ENDPOINT)
     data = response.json()
-    rates = data["rates"]
-    from_rate = float(rates.get(from_currency.upper(), 0))
-    print(from_rate)
-    return from_rate
+    rates = data.get("rates", {})
+    from_rate = rates.get(from_currency.upper())
+
+    if from_rate is None:
+        return {"error": f"Currency '{from_currency}' not found"}
+    
+    return float(from_rate)

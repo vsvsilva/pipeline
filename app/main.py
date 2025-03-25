@@ -11,7 +11,7 @@ def home():
 def get(from_currency: str):
     result = get_currency(from_currency)
     
-    if "error" in result:
+    if isinstance(result, dict) and "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
     
     return result
