@@ -29,7 +29,7 @@ jobs:
       
       - name: Save Logs
         run: |
-          mkdir -p logs
+          sudo mkdir -p logs
           echo "Saving logs..." > logs/build.log
           dmesg >> logs/build.log
           echo "Tests and build logs saved." >> logs/build.log
