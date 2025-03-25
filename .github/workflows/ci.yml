@@ -63,7 +63,7 @@ jobs:
           safety check --full-report --output json > safety-report.json
       
       - name: Upload Safety Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: safety-report
           path: safety-report.json
