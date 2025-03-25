@@ -24,7 +24,6 @@ def test_get_invalid_currency(monkeypatch):
     def mock_get_currency(from_currency):
         return {"error": "Currency 'INVALID' not found"}
 
-    # Substitui a função real "get_currency" pelo mock
     monkeypatch.setattr("app.currency.get_currency", mock_get_currency)
     response = client.get("/get/?from_currency=INVALID")
     assert response.status_code == 400
