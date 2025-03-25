@@ -51,15 +51,16 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install safety
+          pip install bandit
       - name: Check for security vulnerabilities
         run: |
-          safety check --full-report --output json > safety-report.json
-      - name: Upload Safety Report
+          bandit -r app > bandit-report.txt
+      
+      - name: Upload Bandit Report
         uses: actions/upload-artifact@v3
         with:
-          name: safety-report
-          path: safety-report.json
+          name: bandit-report
+          path: bandit-report.txt
 
   build:
     runs-on: ubuntu-latest
