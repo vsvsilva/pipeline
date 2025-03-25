@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          subject: 'Push Notification - Main Branch'
+          body: "A push was made to the main branch of the repository."
+          to: "vitor.devtech@gmail.com"
+          from: "vitor.devtech@gmail.com"
