@@ -10,12 +10,12 @@ def test_home():
 
 def test_get_valid_currency(monkeypatch):
     def mock_get_currency(from_currency):
-        return 5.25
+        return 1
 
     monkeypatch.setattr("app.currency.get_currency", mock_get_currency)
-    response = client.get("/get/?from_currency=BRL")
+    response = client.get("/get/?from_currency=USD")
     assert response.status_code == 200
-    assert response.json() == 5.25
+    assert response.json() == 1
 
 def test_get_invalid_currency(monkeypatch):
     def mock_get_currency(from_currency):
