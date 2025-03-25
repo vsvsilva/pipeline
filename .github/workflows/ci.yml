@@ -45,4 +45,4 @@ jobs:
           body: The build has been completed successfully
           to: ${{ secrets.EMAIL_USERNAME }}
           from: ${{ secrets.EMAIL_USERNAME }}
-          attachments: dist/*,logs/build.log
+          attachments: logs/build.log
