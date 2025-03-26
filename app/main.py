@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from app.currency import get_currency  # Corrigido o caminho do import
+from app.currency import get_currency
 
 app = FastAPI()
 

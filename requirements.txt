@@ -5,3 +5,4 @@ pytest
 fastapi[testclient]
 httpx
 wheel
+uvicorn
