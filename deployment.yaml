@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currency-api
+  labels:
+    app: currency-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: currency-api
+  template:
+    metadata:
+      labels:
+        app: currency-api
+    spec:
+      containers:
+      - name: currency-api
+        image: ghcr.io/vsvsilva/pipeline:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: CURRENCY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: currency-api-secret
+              key: CURRENCY_API_KEY
