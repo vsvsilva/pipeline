@@ -25,3 +25,17 @@ spec:
             secretKeyRef:
               name: currency-api-secret
               key: CURRENCY_API_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: currency-api
+spec:
+  selector:
+    app: currency-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer
