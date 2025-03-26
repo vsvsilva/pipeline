@@ -25,7 +25,6 @@ spec:
             secretKeyRef:
               name: currency-api-secret
               key: CURRENCY_API_KEY
-
 ---
 apiVersion: v1
 kind: Service
