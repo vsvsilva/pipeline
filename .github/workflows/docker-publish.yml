@@ -33,14 +33,10 @@ jobs:
       - name: Configure kubectl
         run: |
           gcloud container clusters get-credentials ${{ secrets.GCP_CLUSTER_NAME }} --zone ${{ secrets.GCP_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
-          kubectl config current-context || echo "Failed to configure kubectl context"
-  
-      - name: Deploy to GCP Kubernetes Cluster
+
+      - name: Deploy and Apply Kubernetes Configuration
         run: |
           kubectl set image deployment/${{ secrets.GCP_DEPLOYMENT_NAME }} \
-          ${{ secrets.GCP_CONTAINER_NAME }}=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest || echo "Failed to set image"
-
-      - name: Apply Kubernetes Deployment
-        run: |
-          kubectl apply -f deployment.yml || echo "Failed to apply deployment"
+          ${{ secrets.GCP_CONTAINER_NAME }}=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+          kubectl apply -f deployment.yml
 
