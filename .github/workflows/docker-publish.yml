@@ -33,19 +33,7 @@ jobs:
       - name: Configure kubectl
         run: |
           gcloud container clusters get-credentials ${{ secrets.GCP_CLUSTER_NAME }} --zone ${{ secrets.GCP_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
-
-      - name: Install gke-gcloud-auth-plugin
-        run: gcloud components install gke-gcloud-auth-plugin --quiet
-
-
-      - name: Enable Cloud Resource Manager API
-        run: gcloud services enable cloudresourcemanager.googleapis.com --project ${{ secrets.GCP_PROJECT_ID }}
-
-      - name: Verify GCP Permissions
-        run: |
-          gcloud auth list
-          gcloud projects get-iam-policy ${{ secrets.GCP_PROJECT_ID }}
-          gcloud container clusters get-credentials ${{ secrets.GCP_CLUSTER_NAME }} --zone ${{ secrets.GCP_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
+          kubectl config set-context --current --namespace=default
 
       - name: Deploy and Apply Kubernetes Configuration
         run: |
