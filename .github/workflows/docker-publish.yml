@@ -36,6 +36,7 @@ jobs:
 
       - name: Deploy and Apply Kubernetes Configuration
         run: |
+          sudo apt-get update
           sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
           kubectl set image deployment/${{ secrets.GCP_DEPLOYMENT_NAME }} \
           ${{ secrets.GCP_CONTAINER_NAME }}=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
