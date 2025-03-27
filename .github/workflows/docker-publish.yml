@@ -39,4 +39,3 @@ jobs:
           kubectl set image deployment/${{ secrets.GCP_DEPLOYMENT_NAME }} \
           ${{ secrets.GCP_CONTAINER_NAME }}=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
           kubectl apply -f deployment.yml
-
