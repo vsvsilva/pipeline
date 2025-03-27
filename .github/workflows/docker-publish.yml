@@ -45,6 +45,6 @@ jobs:
       # Step 6: Deploy the updated Docker image to the Kubernetes cluster
       - name: Deploy and Apply Kubernetes Configuration
         run: |
-          kubectl set image deployment/${{ secrets.GCP_DEPLOYMENT_NAME }} \
-          ${{ secrets.GCP_CONTAINER_NAME }}=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+          kubectl set image deployment/currency_ai \
+          pipeline=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
           kubectl apply -f deployment.yml
