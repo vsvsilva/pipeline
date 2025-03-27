@@ -34,8 +34,12 @@ jobs:
         run: |
           gcloud container clusters get-credentials ${{ secrets.GCP_CLUSTER_NAME }} --zone ${{ secrets.GCP_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Add gke-gcloud-auth-plugin to PATH
-        run: echo "::add-path::$(gcloud info --format='value(installation.sdk_root)')/bin"
+
+      - name: Verify GCP Permissions
+        run: |
+          gcloud auth list
+          gcloud projects get-iam-policy ${{ secrets.GCP_PROJECT_ID }}
+          gcloud container clusters get-credentials ${{ secrets.GCP_CLUSTER_NAME }} --zone ${{ secrets.GCP_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Deploy and Apply Kubernetes Configuration
         run: |
